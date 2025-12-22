@@ -45,6 +45,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "task.context_processors.navbar_visibility",
             ],
         },
     },
@@ -96,4 +97,5 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = "/tasks/"
+
 LOGOUT_REDIRECT_URL = "/accounts/login/"
