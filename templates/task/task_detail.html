@@ -62,6 +62,12 @@
       <a href="{% url 'task:task-list' %}" class="btn btn-link mt-3">
         ← Back to tasks
       </a>
+      <form method="post" action="{% url 'task:task-toggle' object.id %}" class="d-inline">
+        {% csrf_token %}
+          <button type="submit" class="btn btn-sm btn-outline-success">
+            {% if object.is_completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+          </button>
+      </form>
     </div>
   </div>
 </div>

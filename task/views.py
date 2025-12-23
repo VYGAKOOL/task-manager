@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
@@ -77,3 +78,11 @@ class SignUpView(generic.FormView):
     form_class = SignUpForm
     template_name = "registration/sign_up.html"
     success_url = reverse_lazy("login")
+
+
+class TaskToggleCompleteView(LoginRequiredMixin, generic.View):
+    def post(self, request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        task.is_completed = not task.is_completed
+        task.save()
+        return redirect("task:task-detail", pk=pk)
