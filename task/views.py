@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task.forms import SignUpForm
+from task.forms import SignUpForm, TaskForm
 from task.models import Task
 
 
@@ -24,12 +24,12 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
-    fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
+    form_class = TaskForm
     success_url = reverse_lazy("task:task-list")
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
-    fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
+    form_class = TaskForm
     success_url = reverse_lazy("task:task-list")
 
     def get_context_data(self, **kwargs):
