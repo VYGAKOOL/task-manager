@@ -23,19 +23,21 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
+    fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
     success_url = reverse_lazy("task:task-list")
 
-class TaskUpdateView(LoginRequiredMixin, generic.CreateView):
+class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
+    success_url = reverse_lazy("task:task-list")
 
 
-class TaskDetailView(LoginRequiredMixin, generic.CreateView):
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
     context_object_name = "task"
 
 
-class TaskDeleteView(LoginRequiredMixin, generic.CreateView):
+class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     success_url = reverse_lazy("task:task-list")
 
