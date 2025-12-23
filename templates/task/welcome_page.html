@@ -1,40 +1,31 @@
-{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="welcome-container">
+      <h1>Welcome to Task Manager</h1>
+      <p>Manage your tasks efficiently and easily</p>
 
-{% block content %}
-<h1>Welcome to Task Manager</h1>
+    <div class="action-cards">
+      <!-- Sign Up -->
+      <div class="card">
+        <h2>New Here?</h2>
+        <p>Create an account to start managing tasks</p>
+        <a href="{% url 'task:sign-up' %}" class="btn">Sign Up</a>
+      </div>
 
-<button onclick="showLogin()">Login</button>
-<button onclick="showRegister()">Register</button>
-
-<hr>
-
-<div id="login-form" style="display:none;">
-  <h2>Login</h2>
-  <form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ login_form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-</div>
-
-<div id="register-form" style="display:none;">
-  <h2>Register</h2>
-  <form method="post" action="{% url 'task:register' %}">
-    {% csrf_token %}
-    {{ register_form.as_p }}
-    <button type="submit">Register</button>
-  </form>
-</div>
-
-<script>
-function showLogin() {
-  document.getElementById("login-form").style.display = "block";
-  document.getElementById("register-form").style.display = "none";
-}
-
-function showRegister() {
-  document.getElementById("register-form").style.display = "block";
-  document.getElementById("login-form").style.display = "none";
-}
-</script>
-{% endblock %}
+      <!-- Sign In -->
+      <div class="card">
+        <h2>Already a member?</h2>
+        <p>Login to continue where you left off</p>
+        <a href="{% url 'login' %}" class="btn">Sign In</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

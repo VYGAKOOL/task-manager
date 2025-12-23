@@ -1,9 +1,20 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
 
-from task.models import Worker
+from task.models import Position
 
+User = get_user_model()
 
-class WorkerCreationForm(UserCreationForm):
-    class Meta:
-        model = Worker
-        fields = ("username", "password1", "password2", "position")
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    position = forms.ModelChoiceField(queryset=Position.objects.all(), required=True)
+
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', 'position')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fieldname in ['username', 'password1', 'password2']:
+            self.fields[fieldname].help_text = None

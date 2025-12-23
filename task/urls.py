@@ -5,13 +5,14 @@ from task.views import (
     TaskCreateView,
     TaskDetailView,
     TaskDeleteView,
-    TaskUpdateView, WelcomeView, RegisterView
+    TaskUpdateView,
+    WelcomeView, SignUpView,
 )
 
 app_name = "task"
 urlpatterns = [
     path("", WelcomeView.as_view(), name="welcome"),
-    path("register/", RegisterView.as_view(), name="register"),
+    path("sign-up/", SignUpView.as_view(), name="sign-up"),
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
     path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),

@@ -1,10 +1,9 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from task.forms import WorkerCreationForm
+from task.forms import SignUpForm
 from task.models import Task
 
 
@@ -14,7 +13,7 @@ class WelcomeView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["login_form"] = AuthenticationForm()
-        context["register_form"] = WorkerCreationForm()
+        context["register_form"] = SignUpForm()
         return context
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
@@ -41,10 +40,7 @@ class TaskDeleteView(LoginRequiredMixin, generic.CreateView):
     success_url = reverse_lazy("task:task-list")
 
 
-class RegisterView(generic.View):
-    def post(self, request):
-        form = WorkerCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("login")
-        return redirect("task:welcome")
+class SignUpView(generic.FormView):
+    form_class = SignUpForm
+    template_name = "registration/sign_up.html"
+    success_url = reverse_lazy("login")
