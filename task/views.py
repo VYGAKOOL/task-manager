@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views import generic
 
 from task.forms import SignUpForm
@@ -31,15 +31,46 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
     success_url = reverse_lazy("task:task-list")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["breadcrumbs"] = [
+            {"label": "Tasks", "url": reverse("task:task-list")},
+            {"label": self.object.name, "url": reverse("task:task-detail", args=[self.object.id])},
+            {"label": "Edit"},
+        ]
+        return context
+
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
     context_object_name = "task"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.object
+
+        context["breadcrumbs"] = [
+            {"label": "Tasks", "url": reverse("task:task-list")},
+            {"label": task.name},
+        ]
+        return context
+
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     success_url = reverse_lazy("task:task-list")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.object
+
+        context["breadcrumbs"] = [
+            {"label": "Tasks", "url": reverse("task:task-list")},
+            {"label": task.name, "url": reverse("task:task-detail", args=[task.id])},
+            {"label": "Delete"},
+        ]
+        return context
 
 
 class SignUpView(generic.FormView):
