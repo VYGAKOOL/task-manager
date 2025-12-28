@@ -21,6 +21,13 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     context_object_name = "tasks"
 
+    def get_queryset(self):
+        return (
+            Task.objects
+            .select_related("task_type")
+            .prefetch_related("assignees")
+        )
+
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
@@ -42,6 +49,9 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
         ]
         return context
 
+    def get_queryset(self):
+        return Task.objects.select_related("task_type")
+
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
@@ -56,6 +66,13 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
             {"label": task.name},
         ]
         return context
+
+    def get_queryset(self):
+        return (
+            Task.objects
+            .select_related("task_type")
+            .prefetch_related("assignees")
+        )
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -72,6 +89,9 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
             {"label": "Delete"},
         ]
         return context
+
+    def get_queryset(self):
+        return Task.objects.select_related("task_type")
 
 
 class SignUpView(generic.FormView):
