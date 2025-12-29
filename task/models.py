@@ -44,21 +44,15 @@ class Task(models.Model):
     is_completed = models.BooleanField(default=False)
 
     priority = models.CharField(
-        max_length=10,
-        choices=Priority.choices,
-        default=Priority.MEDIUM
+        max_length=10, choices=Priority.choices, default=Priority.MEDIUM
     )
 
     task_type = models.ForeignKey(
-        TaskType,
-        on_delete=models.PROTECT,
-        related_name="tasks"
+        TaskType, on_delete=models.PROTECT, related_name="tasks"
     )
 
     assignees = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="assignees_tasks",
-        blank=True
+        settings.AUTH_USER_MODEL, related_name="assignees_tasks", blank=True
     )
 
     def __str__(self):

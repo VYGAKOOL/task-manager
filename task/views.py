@@ -17,22 +17,20 @@ class WelcomeView(generic.TemplateView):
         context["register_form"] = SignUpForm()
         return context
 
+
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     context_object_name = "tasks"
 
     def get_queryset(self):
-        return (
-            Task.objects
-            .select_related("task_type")
-            .prefetch_related("assignees")
-        )
+        return Task.objects.select_related("task_type").prefetch_related("assignees")
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TaskForm
     success_url = reverse_lazy("task:task-list")
+
 
 class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
@@ -44,7 +42,10 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 
         context["breadcrumbs"] = [
             {"label": "Tasks", "url": reverse("task:task-list")},
-            {"label": self.object.name, "url": reverse("task:task-detail", args=[self.object.id])},
+            {
+                "label": self.object.name,
+                "url": reverse("task:task-detail", args=[self.object.id]),
+            },
             {"label": "Edit"},
         ]
         return context
@@ -68,11 +69,7 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
     def get_queryset(self):
-        return (
-            Task.objects
-            .select_related("task_type")
-            .prefetch_related("assignees")
-        )
+        return Task.objects.select_related("task_type").prefetch_related("assignees")
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
