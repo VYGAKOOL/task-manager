@@ -1,6 +1,6 @@
-from settings.base import *
+from .base import *
 
-DEBUG = "RENDER" not in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
