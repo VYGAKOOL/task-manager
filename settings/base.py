@@ -3,9 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY", default="j&e%x1v2i^e+pl1ha@r0hfuy4jtmgdd=0l4ryj)^_p73#=+xag"
-)
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
