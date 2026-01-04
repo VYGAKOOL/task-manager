@@ -25,7 +25,7 @@
   Admin panel
 
 ⚙️ Local Setup
-  git clone https://github.com/your-username/task-manager.git
+  git clone https://github.com/VYGAKOOL/task-manager
   cd task-manager
   python -m venv .venv
   .venv\Scripts\activate
