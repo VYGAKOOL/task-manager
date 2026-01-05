@@ -20,6 +20,8 @@ Users can create tasks, assign them to team members, track progress, and mark ta
 
 You can test the application here:  
 👉 https://task-manager-pgom.onrender.com
+    Username: alice
+    Password: alice123
 
 ---
 
