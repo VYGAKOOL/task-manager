@@ -1,3 +1,5 @@
+import sys
+
 from .base import *
 
 DEBUG = False
@@ -18,6 +20,13 @@ DATABASES = {
         "PORT": int(os.environ["POSTGRES_DB_PORT"]),
     }
 }
+
+if "test" in sys.argv:
+    DATABASES["default"] = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": ":memory:",
+    }
+
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True

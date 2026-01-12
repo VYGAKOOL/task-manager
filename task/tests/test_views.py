@@ -36,7 +36,7 @@ class WelcomeViewTest(TestCase):
 class TaskListViewTest(BaseTaskTestCase):
     def test_login_required(self):
         response = self.client.get(reverse("task:task-list"))
-        self.assertEqual(response.status_code, 302)  # редірект на логін
+        self.assertEqual(response.status_code, 302)
 
     def test_task_list_authenticated(self):
         self.client.login(username="testuser", password="testpass123")
