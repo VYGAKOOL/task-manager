@@ -3,21 +3,18 @@ from django.contrib.auth.admin import UserAdmin
 from .models import Position, TaskType, Worker, Task
 
 
-# --- Position ---
 @admin.register(Position)
 class PositionAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
 
-# --- TaskType ---
 @admin.register(TaskType)
 class TaskTypeAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
 
-# --- Worker ---
 @admin.register(Worker)
 class WorkerAdmin(UserAdmin):
     list_display = (
@@ -34,7 +31,6 @@ class WorkerAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + ((None, {"fields": ("position",)}),)
 
 
-# --- Task ---
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
     list_display = ("name", "task_type", "priority", "is_completed", "deadline")
