@@ -1,34 +1,39 @@
-🗂️ Task Manager
+# 🗂️ Task Manager
 
-  Task Manager is a Django-based web application for managing team tasks.
-  Team members can create tasks, assign them to others, track deadlines, priorities, and completion status.
-  
-  🔗 Live demo:
-  👉 You can test the app here: https://task-manager-pgom.onrender.com
+Task Manager is a web application built with Django that helps teams manage tasks efficiently.
+Users can create tasks, assign them to team members, track progress, and mark tasks as completed.
 
-🚀 Features
+---
 
-  User registration and authentication
-  
-  Users have positions (Developer, QA, Manager)
-  
-  Create, update, delete tasks
-  
-  Assign tasks to multiple users
-  
-  Task types, priorities, and deadlines
-  
-  Mark tasks as completed
-  
-  Welcome page for unauthenticated users
-  
-  Admin panel
+## 🚀 Features
 
-⚙️ Local Setup
-  git clone https://github.com/your-username/task-manager.git
-  cd task-manager
-  python -m venv .venv
-  .venv\Scripts\activate
-  pip install -r requirements.txt
-  python manage.py migrate
-  python manage.py runserver
+- User authentication (Sign up / Login)
+- Task creation and editing
+- Assign tasks to multiple users
+- Task prioritization and deadlines
+- Mark tasks as completed
+- Simple and clean UI
+
+---
+
+## 🌐 Live Demo
+
+You can test the application here:  
+👉 https://task-manager-pgom.onrender.com
+
+**Demo credentials:**  
+- Username: "alice"  
+- Password: "alice123"
+
+---
+
+## ⚙️ Local Setup
+
+```bash
+git clone https://github.com/VYGAKOOL/task-manager
+cd task-manager
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
