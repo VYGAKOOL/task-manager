@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for task in tasks %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="{% url 'task:task-detail' task.id %}" class="text-decoration-none">{{ task.name }}</a>
+        </h5>
+        <p class="card-text mb-1"><strong>Type:</strong> {{ task.task_type.name }}</p>
+        <p class="card-text mb-1"><strong>Priority:</strong> {{ task.get_priority_display }}</p>
+        <p class="card-text"><strong>Status:</strong> {% if task.is_completed %}✅ Completed{% else %}❌ Incomplete{% endif %}</p>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No tasks yet</p>
+  {% endfor %}
+</div>
+{% endblock %}

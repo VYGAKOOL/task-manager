@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="welcome-container">
+      <h1>Welcome to Task Manager</h1>
+      <p>Manage your tasks efficiently and easily</p>
+
+    <div class="action-cards">
+      <div class="card">
+        <h2>New Here?</h2>
+        <p>Create an account to start managing tasks</p>
+        <a href="{% url 'accounts:sign-up' %}" class="btn">Sign Up</a>
+      </div>
+
+      <div class="card">
+        <h2>Already a member?</h2>
+        <p>Login to continue where you left off</p>
+        <a href="{% url 'login' %}" class="btn">Sign In</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

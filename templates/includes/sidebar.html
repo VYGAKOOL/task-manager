@@ -1,0 +1,33 @@
+<nav class="navbar navbar-light bg-light flex-column vh-100 p-3 position-fixed" style="width: 250px;">
+  <a class="navbar-brand mb-4" href="{% url 'task:task-list' %}">TaskManager</a>
+
+  {% if user.is_authenticated %}
+    <div class="mb-4 text-center">
+      <p class="mb-1">Logged in as <strong>{{ user.username }}</strong></p>
+      <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-danger btn-sm w-100">Logout</button>
+      </form>
+    </div>
+  {% else %}
+    <div class="mb-4 text-center">
+      <a href="{% url 'login' %}" class="btn btn-primary w-100">Login</a>
+    </div>
+  {% endif %}
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item mb-2">
+      <a href="{% url 'task:task-list' %}" class="nav-link active">
+        <i class="bi bi-list-task"></i> Tasks
+      </a>
+    </li>
+    <li class="nav-item mb-2">
+      <a href="{% url 'task:task-create' %}" class="nav-link">
+        <i class="bi bi-plus-circle"></i> Create Task
+      </a>
+    </li>
+  </ul>
+
+  <hr>
+  <small class="text-muted d-block text-center">© 2025 TaskManager</small>
+</nav>

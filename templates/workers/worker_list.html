@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Workers</h1>
+
+<table border="1" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Position</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for worker in workers %}
+            <tr>
+                <td>{{ worker.username }}</td>
+                <td>{{ worker.email }}</td>
+                <td>{{ worker.position }}</td>
+                <td>
+                    {% if worker.is_active %}
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif %}
+                </td>
+                <td>
+                    {% if perms.task.change_worker %}
+                        <a href="{% url 'accounts:account-edit' worker.pk %}">
+                            Edit
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5">No workers found.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

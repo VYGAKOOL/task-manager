@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+  {% if object %}Update Task{% else %}Create Task{% endif %}
+{% endblock %}
+
+{% block content %}
+{% include "includes/breadcrumbs.html" %}
+<div class="container" style="max-width: 600px;">
+  <h2 class="mb-4">
+    {% if object %}Update Task{% else %}Create Task{% endif %}
+  </h2>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <div class="d-flex justify-content-between">
+      <a href="{% url 'task:task-list' %}" class="btn btn-secondary">
+        Cancel
+      </a>
+
+      <button type="submit" class="btn btn-primary">
+        {% if object %}Update{% else %}Create{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

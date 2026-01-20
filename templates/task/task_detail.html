@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+{% include "includes/breadcrumbs.html" %}
+<div class="container" style="max-width: 700px;">
+  <div class="card shadow-sm">
+  <div class="card-body position-relative">
+
+    <div class="d-flex justify-content-between align-items-start mb-3">
+      <h3 class="card-title mb-0">{{ object.name }}</h3>
+
+      <div>
+        <a href="{% url 'task:task-update' object.id %}" class="btn btn-sm btn-outline-primary">
+          Edit
+        </a>
+        <a href="{% url 'task:task-delete' object.id %}" class="btn btn-sm btn-outline-danger">
+          Delete
+        </a>
+      </div>
+    </div>
+
+    <p class="text-muted mb-3">{{ object.description|linebreaks }}</p>
+
+    <ul class="list-group list-group-flush mb-3">
+      <li class="list-group-item"><strong>Type:</strong> {{ object.task_type.name }}</li>
+      <li class="list-group-item"><strong>Priority:</strong> {{ object.get_priority_display }}</li>
+      <li class="list-group-item"><strong>Status:</strong>
+        {% if object.is_completed %}✅ Completed{% else %}❌ Incomplete{% endif %}
+      </li>
+      {% if object.deadline %}
+      <li class="list-group-item"><strong>Deadline:</strong> {{ object.deadline }}</li>
+      {% endif %}
+    </ul>
+
+    <h6>Assignees:</h6>
+    <ul>
+      {% for user in object.assignees.all %}
+        <li>{{ user.username }}</li>
+      {% empty %}
+        <li class="text-muted">No assignees</li>
+      {% endfor %}
+    </ul>
+
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <a href="{% url 'task:task-list' %}" class="btn btn-link">← Back to tasks</a>
+      <form method="post" action="{% url 'task:task-toggle' object.id %}" class="m-0">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-success">
+          {% if object.is_completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+        </button>
+      </form>
+    </div>
+
+  </div>
+</div>
+</div>
+{% endblock %}
