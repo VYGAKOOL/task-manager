@@ -3,19 +3,10 @@ from datetime import date
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from task.models import Position, TaskType, Task
+from task.models import TaskType, Task
+from accounts.models import Position
 
 User = get_user_model()
-
-
-class PositionModelTest(TestCase):
-    def test_create_position(self):
-        position = Position.objects.create(name="Developer")
-        self.assertEqual(position.name, "Developer")
-
-    def test_position_str(self):
-        position = Position.objects.create(name="QA")
-        self.assertEqual(str(position), "QA")
 
 
 class TaskTypeModelTest(TestCase):
