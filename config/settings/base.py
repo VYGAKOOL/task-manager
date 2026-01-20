@@ -12,12 +12,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "accounts",
     "task",
     "crispy_forms",
     "crispy_bootstrap4",
 ]
 
-AUTH_USER_MODEL = "task.Worker"
+AUTH_USER_MODEL = "accounts.Worker"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
