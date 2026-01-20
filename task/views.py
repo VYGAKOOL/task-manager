@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from task.forms import SignUpForm, TaskForm
+from accounts.forms import SignUpForm
+from task.forms import TaskForm
 from task.models import Task
 
 
@@ -23,7 +24,8 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     context_object_name = "tasks"
 
     def get_queryset(self):
-        return Task.objects.select_related("task_type").prefetch_related("assignees")
+        return (Task.objects.select_related("task_type")
+                .prefetch_related("assignees"))
 
 
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
@@ -69,7 +71,8 @@ class TaskDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
     def get_queryset(self):
-        return Task.objects.select_related("task_type").prefetch_related("assignees")
+        return (Task.objects.select_related("task_type")
+                .prefetch_related("assignees"))
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
@@ -82,19 +85,14 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
         context["breadcrumbs"] = [
             {"label": "Tasks", "url": reverse("task:task-list")},
-            {"label": task.name, "url": reverse("task:task-detail", args=[task.id])},
+            {"label": task.name,
+             "url": reverse("task:task-detail", args=[task.id])},
             {"label": "Delete"},
         ]
         return context
 
     def get_queryset(self):
         return Task.objects.select_related("task_type")
-
-
-class SignUpView(generic.FormView):
-    form_class = SignUpForm
-    template_name = "registration/sign_up.html"
-    success_url = reverse_lazy("login")
 
 
 class TaskToggleCompleteView(LoginRequiredMixin, generic.View):

@@ -7,18 +7,32 @@ from task.views import (
     TaskDeleteView,
     TaskUpdateView,
     WelcomeView,
-    SignUpView,
     TaskToggleCompleteView,
 )
 
 app_name = "task"
 urlpatterns = [
     path("", WelcomeView.as_view(), name="welcome"),
-    path("sign-up/", SignUpView.as_view(), name="sign-up"),
     path("tasks/", TaskListView.as_view(), name="task-list"),
     path("task/create/", TaskCreateView.as_view(), name="task-create"),
-    path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
-    path("task/<int:pk>/detail/", TaskDetailView.as_view(), name="task-detail"),
-    path("task/<int:pk>/delete/", TaskDeleteView.as_view(), name="task-delete"),
-    path("<int:pk>/toggle/", TaskToggleCompleteView.as_view(), name="task-toggle"),
+    path(
+        "task/<int:pk>/update/",
+        TaskUpdateView.as_view(),
+        name="task-update"
+    ),
+    path(
+        "task/<int:pk>/detail/",
+        TaskDetailView.as_view(),
+        name="task-detail"
+    ),
+    path(
+        "task/<int:pk>/delete/",
+        TaskDeleteView.as_view(),
+        name="task-delete"
+    ),
+    path(
+        "<int:pk>/toggle/",
+        TaskToggleCompleteView.as_view(),
+        name="task-toggle"
+    ),
 ]
