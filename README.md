@@ -22,8 +22,8 @@ You can test the application here:
 👉 https://task-manager-pgom.onrender.com
 
 **Demo credentials:**  
-- Username: "alice"  
-- Password: "alice123"
+- Username: "john_cena"  
+- Password: "john123"
 
 ---
 
