@@ -1,7 +1,9 @@
 from django.test import TestCase
 from datetime import date
-from task.forms import TaskForm, SignUpForm
-from task.models import Position, TaskType, Worker
+
+from accounts.models import Position, Worker
+from task.forms import TaskForm
+from task.models import TaskType
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
